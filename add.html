@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="add.css" rel="stylesheet">
+</head>
+<body>
+    <div class="heading">
+        <ul>
+            <li>
+                <a href="home.html">Home Page</a>
+            </li>
+            <li>
+                <a href="">Lectures List</a> 
+            </li>
+            <li class="dropdown">
+                <a href="">List of Student</a>
+                <div class="dropdown-content">
+                    <a href="student.html">Class 10</a>
+                    <a href="student.html">Class 11</a>
+                    <a href="student.html">Class 12</a>
+                </div>
+            </li>
+            <li>
+               <a href="">Result</a> 
+            </li>
+            <li>
+               <a href="">Date of Exam</a> 
+            </li>
+            <li>
+               <a href="">Contact</a> 
+            </li>
+            <li>
+                <a href="add.html">Add new Student</a> 
+             </li>
+            <li>
+               <a href="login.html">Login</a> 
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div class="container">
+	<div class="panel">
+		<div class="heading">
+			Input Student information
+		</div>
+		<div class="body">
+			<form method="post" action="student.html">
+				<div class="form-group">
+					<label>Student Name :</label>
+					<input class="form-input" type="text" name="name" id="name" placeholder="Enter student name">
+                    <div class="error-massage"></div>
+				</div>
+                <div class="form-group">
+					<label>Email :</label>
+					<input class="form-input" type="text" name="id" id="email" placeholder="Enter student Email">
+				</div>
+				<div class="form-group">
+					<label>Student ID :</label>
+					<input class="form-input" type="text" name="stdid" id="stdid" placeholder="Enter student id" value="">
+				</div>
+				<div class="form-group">
+					<label>Date of Birth :</label>
+					<input class="form-input" type="text" name="dob" id="dob" placeholder="Enter date of birth" value="dd/mm/yyyy">
+				</div>
+                <div class="form-group">
+					<label>Sex :</label><br>
+                    <select name="sex" id="sex">
+                        <option value="">Male</option>
+                        <option value="">Female</option>
+                        <option value="">Other</option>
+                    </select>
+				</div>
+                <div class="form-group">
+					<label>Student phone number :</label>
+					<input class="form-input" type="text" name="phone" id="phone" placeholder="Enter student phone number" value="">
+				</div>
+                <div class="form-group">
+					<label>Address :</label>
+					<input class="form-input" type="text" name="address" id="address" placeholder="Enter Address" value="">
+				</div>
+				<div class="form-group">
+					<button class="btn-success" onclick="add()">Add Student</button>
+					<!-- <button class="btn-reset" type="reset">Reset</button> -->
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+
+    <script>
+        var data=[]
+        function add(){
+            var item_name = document.getElementById("name").value
+            var item_email = document.getElementById("email").value
+            var item_stdid = document.getElementById("stdid").value
+            var item_dob = document.getElementById("dob").value
+            var item_sex = document.getElementById("sex").value
+            var item_phone = document.getElementById("phone").value
+            var item_address = document.getElementById("address").value
+
+            var item={
+                Id : item_stdid,
+                Name : item_name,
+                Email : item_email,
+                Sex : item_sex,
+                Address : item_address,
+                Phone : item_phone,
+                Dob : item_dob
+                
+            }
+            data.push(item)
+            render()
+        }
+
+        function render(){
+            table = `<tr>
+                           <th>ID</th>
+                           <th>Name</th>
+                           <th>Email</th>
+                           <th>Sex</th>
+                           <th>Address</th>
+                           <th>Phone</th>
+                           <th>Dob</th>
+                       </tr>`
+                       for(let i=0;i<data.length;i++){
+                        table += `<tr>
+                           <td>${data[i].Id}</td>
+                           <td>${data[i].Name}</td>
+                           <td>${data[i].Email}</td>
+                           <td>${data[i].Sex}</td>
+                           <td>${data[i].Address}</td>
+                           <td>${data[i].Phone}</td>
+                           <td>${data[i].Dob}</td>
+                       </tr>`
+                       }
+                       document.getElementById("render").innerHTML= table
+        }
+    </script>
+
+</body>
+</html>
