@@ -49,23 +49,26 @@
 			Input Student information
 		</div>
 		<div class="body">
-			<form method="post" action="student.html">
+			<!-- <form method="post" action="student.html"> -->
 				<div class="form-group">
 					<label>Student Name :</label>
 					<input class="form-input" type="text" name="name" id="name" placeholder="Enter student name">
-                    <div class="error-massage"></div>
+                    <div class="error-message"></div>
 				</div>
                 <div class="form-group">
 					<label>Email :</label>
 					<input class="form-input" type="text" name="id" id="email" placeholder="Enter student Email">
+                    <div class="error-message"></div>
 				</div>
 				<div class="form-group">
 					<label>Student ID :</label>
-					<input class="form-input" type="text" name="stdid" id="stdid" placeholder="Enter student id" value="">
+					<input class="form-input" type="text" name="student id" id="stdid" placeholder="Enter student id" value="">
+                    <div class="error-message"></div>
 				</div>
 				<div class="form-group">
 					<label>Date of Birth :</label>
-					<input class="form-input" type="text" name="dob" id="dob" placeholder="Enter date of birth" value="dd/mm/yyyy">
+					<input class="form-input" type="text" name="date of birth" id="dob" placeholder="dd/mm/yyyy" value="">
+                    <div class="error-message"></div>
 				</div>
                 <div class="form-group">
 					<label>Sex :</label><br>
@@ -74,72 +77,103 @@
                         <option value="">Female</option>
                         <option value="">Other</option>
                     </select>
+                    <div class="error-message"></div>
 				</div>
                 <div class="form-group">
 					<label>Student phone number :</label>
 					<input class="form-input" type="text" name="phone" id="phone" placeholder="Enter student phone number" value="">
+                    <div class="error-message"></div>
 				</div>
                 <div class="form-group">
 					<label>Address :</label>
 					<input class="form-input" type="text" name="address" id="address" placeholder="Enter Address" value="">
+                    <div class="error-message"></div>
 				</div>
 				<div class="form-group">
-					<button class="btn-success" onclick="add()">Add Student</button>
+					<button class="btn-success" onclick="addNew()">Add Student</button>
 					<!-- <button class="btn-reset" type="reset">Reset</button> -->
 				</div>
-			</form>
+			<!-- </form> -->
 		</div>
 	</div>
 	</div>
 
     <script>
-        var data=[]
-        function add(){
-            var item_name = document.getElementById("name").value
-            var item_email = document.getElementById("email").value
-            var item_stdid = document.getElementById("stdid").value
-            var item_dob = document.getElementById("dob").value
-            var item_sex = document.getElementById("sex").value
-            var item_phone = document.getElementById("phone").value
-            var item_address = document.getElementById("address").value
-
-            var item={
-                Id : item_stdid,
-                Name : item_name,
-                Email : item_email,
-                Sex : item_sex,
-                Address : item_address,
-                Phone : item_phone,
-                Dob : item_dob
-                
+        //check validate
+        function validateInput(){
+            let formElement=document.querySelector(".body")
+            let inputElement = formElement.querySelectorAll(".form-input")
+            for(let i=0;i<inputElement.length;i++){
+                if (inputElement[i].value===""){
+                    inputElement[i].parentElement.querySelector(".error-message").innerText = `Please enter your ${inputElement[i].name}`}
+                    else{
+                        inputElement[i].parentElement.querySelector(".error-message").innerText =""
+                    }
+                }
             }
-            data.push(item)
-            render()
-        }
+        //luu du lieu
+        function addNew(){
+            validateInput()
+            let formElement=document.querySelector(".body")
+            let errorElement = formElement.querySelectorAll(".error-message")
+            let arrErrorElement =[]
+            for (let i = 0; i < errorElement.length; i++){
+                arrErrorElement.push(errorElement[i].innerText)
 
-        function render(){
-            table = `<tr>
-                           <th>ID</th>
-                           <th>Name</th>
-                           <th>Email</th>
-                           <th>Sex</th>
-                           <th>Address</th>
-                           <th>Phone</th>
-                           <th>Dob</th>
-                       </tr>`
-                       for(let i=0;i<data.length;i++){
-                        table += `<tr>
-                           <td>${data[i].Id}</td>
-                           <td>${data[i].Name}</td>
-                           <td>${data[i].Email}</td>
-                           <td>${data[i].Sex}</td>
-                           <td>${data[i].Address}</td>
-                           <td>${data[i].Phone}</td>
-                           <td>${data[i].Dob}</td>
-                       </tr>`
-                       }
-                       document.getElementById("render").innerHTML= table
+                }
+            let checkErrorElement = arrErrorElement.every(value=>value === "")
+            if (checkErrorElement){
+                //save data
+            }
         }
+        
+        // var data=[]
+        // function add(){
+        //     var item_name = document.getElementById("name").value
+        //     var item_email = document.getElementById("email").value
+        //     var item_stdid = document.getElementById("stdid").value
+        //     var item_dob = document.getElementById("dob").value
+        //     var item_sex = document.getElementById("sex").value
+        //     var item_phone = document.getElementById("phone").value
+        //     var item_address = document.getElementById("address").value
+
+        //     var item={
+        //         Id : item_stdid,
+        //         Name : item_name,
+        //         Email : item_email,
+        //         Sex : item_sex,
+        //         Address : item_address,
+        //         Phone : item_phone,
+        //         Dob : item_dob
+                
+        //     }
+        //     data.push(item)
+        //     render()
+        // }
+
+        // function render(){
+        //     table = `<tr>
+        //                    <th>ID</th>
+        //                    <th>Name</th>
+        //                    <th>Email</th>
+        //                    <th>Sex</th>
+        //                    <th>Address</th>
+        //                    <th>Phone</th>
+        //                    <th>Dob</th>
+        //                </tr>`
+        //                for(let i=0;i<data.length;i++){
+        //                 table += `<tr>
+        //                    <td>${data[i].Id}</td>
+        //                    <td>${data[i].Name}</td>
+        //                    <td>${data[i].Email}</td>
+        //                    <td>${data[i].Sex}</td>
+        //                    <td>${data[i].Address}</td>
+        //                    <td>${data[i].Phone}</td>
+        //                    <td>${data[i].Dob}</td>
+        //                </tr>`
+        //                }
+        //                document.getElementById("render").innerHTML= table
+        // }
     </script>
 
 </body>
